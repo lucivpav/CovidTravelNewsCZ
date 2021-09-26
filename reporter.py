@@ -117,7 +117,7 @@ def getBody(mailData, updates, daily, plain):
     elif weekly:
         body += ' týden'
 
-    body += ' probělha aktualizace cestovních omezení:'
+    body += ' proběhla aktualizace cestovních omezení:'
 
     body += newLine(plain, html)
     if plain:
