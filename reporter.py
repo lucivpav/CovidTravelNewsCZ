@@ -1,12 +1,8 @@
 import sys
 import os
-import tempfile
-import shutil
 import getopt
-import re
 import datetime
 import json
-from dateutil import tz
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from definitions import STATUS_FILE, MOST_RECENT_FILE, MAIN_URL, CountryData, MailData

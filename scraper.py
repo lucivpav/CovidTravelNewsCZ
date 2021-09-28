@@ -1,10 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-import lxml
 import sys
-import os
-import tempfile
-import shutil
 import getopt
 import re
 import datetime
@@ -51,7 +47,7 @@ def main(argv):
             exit(1)
 
     response = requests.get(MAIN_URL)
-    soup = BeautifulSoup(response.content, 'lxml')
+    soup = BeautifulSoup(response.content, 'html.parser')
     countryAnchors = soup.find('div', {'class': 'article_content'}) \
                             .div.find_all('a', href=re.compile('https://www.mzv.cz/'))
 
@@ -63,7 +59,7 @@ def main(argv):
     countryData = []
     for i, countryLink in enumerate(countryLinks):
         response = requests.get(countryLink)
-        soup = BeautifulSoup(response.content, 'lxml')
+        soup = BeautifulSoup(response.content, 'html.parser')
         articleDateElement = soup.find('p', {'class': 'articleDate'})
         if articleDateElement == None:
             print('Warning: skipping unparsable country: ' + countryNames[i])
