@@ -10,7 +10,9 @@ class CountryData:
         self.link = link
 
 class MailData:
-    def __init__(self, name, nameInHelloForm, email):
+    def __init__(self, name, nameInHelloForm, email, daily, weekly):
         self.name = name
         self.nameInHelloForm = nameInHelloForm
         self.email = email
+        self.daily = daily
+        self.weekly = weekly

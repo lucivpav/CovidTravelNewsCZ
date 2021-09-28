@@ -82,8 +82,5 @@ def main(argv):
     mostRecent = sorted(countryData, key=lambda d: d.updateTimestamp, reverse=True)
     writeCountryData(MOST_RECENT_FILE, mostRecent)
 
-
-    pass
-
 if __name__ == '__main__':
     main(sys.argv[1:])

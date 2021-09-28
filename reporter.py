@@ -29,6 +29,9 @@ def readCountryData(filePath):
             firstLine = False
     return countryData
 
+def strToBool(str):
+    return str == 'True' or str == 'true'
+
 def readMailListData(filePath):
     mailListData = []
     with open(filePath, 'r') as f:
@@ -38,8 +41,9 @@ def readMailListData(filePath):
             if line == '':
                 break
             if not firstLine:
-                name, nameInHelloForm, email = line.rstrip().split(',')
-                mailListData.append(MailData(name, nameInHelloForm, email))
+                name, nameInHelloForm, email, daily, weekly = line.rstrip().split(',')
+                mailListData.append(MailData(name, nameInHelloForm, email, \
+                                                strToBool(daily), strToBool(weekly)))
             firstLine = False
     return mailListData
 
@@ -85,7 +89,8 @@ def main(argv):
 
     mailListData = readMailListData(MAIL_LIST_FILE)
     for mailData in mailListData:
-        sendReport(mailData, updates, daily)
+        if daily and mailData.daily or weekly and mailData.weekly:
+            sendReport(mailData, updates, daily)
 
 def sendMail(receiver, message):
     with open(MAIL_SETTINGS_FILE, 'r') as f:
