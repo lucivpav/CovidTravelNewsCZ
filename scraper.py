@@ -70,8 +70,13 @@ def main(argv):
             # TODO: the list of unparsable countries should be part of an email, for reference
             continue
         rawUpdateTime = parseRawUpdateTime(articleDateElement)
-        date = re.search('\s?(.+)\s/', rawUpdateTime).group(1)
-        time = re.search('/\s(.+)', rawUpdateTime).group(1)
+        dateMatch = re.search('\s?(.+)\s/', rawUpdateTime)
+        if dateMatch != None:
+            date = dateMatch.group(1)
+            time = re.search('/\s(.+)', rawUpdateTime).group(1)
+        else:
+            date = re.search('\s?(.+)$', rawUpdateTime).group(1)
+            time = '00:00'
         updateTime = date + ' ' + time
         updateTimestamp = datetime.datetime.strptime(updateTime, "%d.%m.%Y %H:%M") \
                             .replace(tzinfo=tz.gettz('Europe/Prague')).timestamp()
